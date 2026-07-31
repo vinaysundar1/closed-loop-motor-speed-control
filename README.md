@@ -112,6 +112,8 @@ Kd: 0.02 → 0.2 → 0.08). The first overshoot peak stayed essentially unchange
 Ki or Kd, was driving the size of that first overshoot, since neither term had moved
 it despite multiple independent tests.
 
+**Note on Ki tuning:** I also tested higher Ki values (up to 1.0) to see if faster settling was worth the tradeoff. Higher Ki consistently reduced settling time but increased overshoot (up to ~172 RPM vs. the original ~157 RPM), and increasing Kd alongside it didn't meaningfully reduce that overshoot. I kept Kp=0.5, Ki=0.5, Kd=0.08 as the final configuration since it produced the smallest overshoot/undershoot swings, which I prioritized over faster settling for this system.
+
 **Final tune:** lowered Kp itself (1.0 → 0.6 → 0.5), keeping Ki=0.5 and Kd=0.08 fixed.
 The first overshoot dropped sharply with each reduction (≈205 → 170 → 157 RPM), while
 the undershoot depth stayed roughly constant (~90–100 RPM) regardless of Kp.
