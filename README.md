@@ -10,6 +10,9 @@ plotting and an OLED status display.
 
 <img src="plotters/step_response_after1.png" width="600">
 
+*Kp=0.5, Ki=0.5, Kd=0.08 — settles within one overshoot/undershoot cycle (~157 RPM
+peak, ~90 RPM trough) and holds steady at setpoint.*
+
 ## Results
 
 With a live, continuously-varying setpoint (driven by a potentiometer rather than a
