@@ -42,9 +42,6 @@ flowchart LR
     A --> G
 ```
 
-GitHub renders Mermaid diagrams natively in the README — no image export needed, just
-keep this code block as-is.
-
 ## How It Works
 
 1. **Speed measurement:** A hardware interrupt counts encoder pulses on every rising
@@ -58,7 +55,7 @@ keep this code block as-is.
      amplifies noise more than any other term).
    - Conditional-integration anti-windup — the integral only accumulates when doing
      so wouldn't push the output past the PWM actuator limits (0–255).
-4. **Actuation:** Final PID output is clamped to 0–255 and written via `analogWrite`
+4. **Actuation:** Final PID output is clamped to 0–255 (the PID math itself has no upper or lower bound, but analogWrite only accepts an 8-bit PWM duty cycle, so the raw sum has to be forced into the range the hardware can actually accept) and written via `analogWrite`
    to the motor driver's PWM input.
 
 ## Encoder Calibration
@@ -67,7 +64,7 @@ Rather than trust the nominal spec (11 pulses/rev × assumed 20:1 gear ratio = 2
 PPR), I calibrated empirically: rotated the output shaft a measured number of full
 turns by hand and counted ticks directly.
 
-- Measured: **170 PPR** (averaged over N trials — *replace N with your actual trial count*)
+- Measured: **170 PPR** (averaged over 5 trials)
 - Implied gear ratio: ~15.5:1, not the assumed 20:1
 - This matters because this motor line uses non-round gearbox ratios (its spec sheet
   lists ratios like 1:44, 1:103, 1:230 across RPM variants — not clean round numbers),
@@ -137,8 +134,7 @@ steady-state tracking within ~±5 RPM*
 
 ## Lessons Learned
 
-- Sensor noise, not just gain values, can be the root cause of oscillation —
-  filtering the measurement is often a prerequisite to tuning, not an afterthought.
+- Sensor noise, not just gain values, can be the root cause of oscillation. Filtering the measurement is important in the tuning process.
 - Anti-windup implementation matters: clamping the integral's final value is not the
   same as preventing it from over-accumulating in the first place.
 - Empirical calibration (measuring encoder PPR directly) caught an incorrect
@@ -147,12 +143,8 @@ steady-state tracking within ~±5 RPM*
 ## Future Improvements
 
 - Switch to derivative-on-measurement instead of derivative-on-error, so a fast knob
-  turn can never cause a derivative kick, even in principle
+  turn can never cause a derivative kick
 - Reset the integral term on large setpoint jumps, so accumulated history from the
   old target doesn't bleed into the transient response at a new one
-- Validate response at the low (~20-30 RPM) and high (~350+ RPM) ends of the range,
-  not just the ~55-215 RPM window tested so far — gains tuned at one operating point
-  don't always generalize across a full range for a real (nonlinear) DC motor
 - Quadrature (2-channel) decoding for direction sensing and 4x resolution
-- Feedforward term to compensate for motor stiction/deadband
 - Auto-tuning via relay/Ziegler-Nichols method triggered by a button press
