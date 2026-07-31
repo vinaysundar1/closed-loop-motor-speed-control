@@ -111,7 +111,7 @@ the undershoot depth stayed roughly constant (~90–100 RPM) regardless of Kp �
 indicating the undershoot is closer to an inherent property of the system's single
 damped cycle rather than something Kp, Ki, or Kd individually controls.
 
-<img src="plotters/step_response_kp_final.png" width="600">
+<img src="plotters/step_response_after1.png" width="600">
 
 *Kp=0.5, Ki=0.5, Kd=0.08 — settles after one overshoot/undershoot cycle (~157 RPM peak,
 ~90 RPM trough), then a smooth, non-oscillatory approach to setpoint*
