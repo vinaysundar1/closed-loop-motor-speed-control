@@ -107,9 +107,7 @@ it despite multiple independent tests.
 
 **Final tune:** lowered Kp itself (1.0 → 0.6 → 0.5), keeping Ki=0.5 and Kd=0.08 fixed.
 The first overshoot dropped sharply with each reduction (≈205 → 170 → 157 RPM), while
-the undershoot depth stayed roughly constant (~90–100 RPM) regardless of Kp —
-indicating the undershoot is closer to an inherent property of the system's single
-damped cycle rather than something Kp, Ki, or Kd individually controls.
+the undershoot depth stayed roughly constant (~90–100 RPM) regardless of Kp.
 
 <img src="plotters/step_response_after1.png" width="600">
 
