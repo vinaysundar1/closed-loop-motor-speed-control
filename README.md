@@ -9,8 +9,8 @@ plotting and an OLED status display.
 ## Results
 
 With a live, continuously-varying setpoint (driven by a potentiometer rather than a
-fixed step), the controller tracks a ramping target with about one damped overshoot
-cycle before settling, and holds within roughly **±2 RPM of setpoint at steady
+fixed step), the controller tracks a ramping target with about two damped overshoot
+cycles before settling, and holds within roughly **±2 RPM of setpoint at steady
 state**.
 
 ## Hardware
@@ -69,7 +69,7 @@ turns by hand and counted ticks directly.
 
 **Initial attempt** — naive PID with unfiltered RPM feedback:
 
-![Growing oscillation, unfiltered](plotters/step_response_before.png)
+<img src="plotters/step_response_before.png" width="600">
 *Kp=0.6, Ki=0.1, Kd=0.05 — oscillation amplitude grows over time rather than settling*
 
 Diagnosis: the derivative term was amplifying tick-count measurement noise (division
@@ -80,7 +80,7 @@ contributing to a sustained/growing limit cycle.
 **Fix:** added EMA filtering on the RPM measurement and on the derivative term, and
 switched to conditional-integration anti-windup.
 
-![Damped response after filtering, Kp=1](plotters/step_response_filtered.png)
+<img src="plotters/step_response_filtered.png" width="600">
 *Kp=1.0, Ki=0.08, Kd=0.02 — clean damped response, but settles ~30 RPM below setpoint*
 
 Diagnosis: proportional control alone cannot fully close steady-state error against
@@ -90,7 +90,7 @@ was too small to close it in a reasonable time.
 **Final tune:** increased Ki to close the steady-state gap without reintroducing
 oscillation.
 
-![Final tuned response](plotters/step_response_final.png)
+<img src="plotters/step_response_final.png" width="600">
 *Kp=1.0, Ki=0.75, Kd=0.02*
 *Final result: settles at setpoint with minimal overshoot*
 
@@ -112,9 +112,9 @@ A moving setpoint introduces failure modes a fixed step test doesn't expose:
   (derivative-on-error reacts to setpoint changes; derivative-on-measurement does
   not, since it only differentiates the physical RPM signal).
 
-![Live setpoint tracking a potentiometer ramp](plotters/live_setpoint_tracking.png)
+<img src="plotters/live_setpoint_tracking.png" width="600">
 *Kp=1.0, Ki=0.75, Kd=0.02 — RPM (orange) tracks a rising setpoint (blue) from ~55 to
-~215 RPM, with one small overshoot/undershoot cycle before settling and holding
+~215 RPM, with two overshoot/undershoot cycles before settling and holding
 steady-state tracking within ~±2 RPM*
 
 ## Final PID Gains
