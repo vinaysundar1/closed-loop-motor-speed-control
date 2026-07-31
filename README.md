@@ -6,7 +6,7 @@ plotting and an OLED status display.
 
 <img src="plotters/hardware_setup.jpg" width="500">
 
-*Arduino Uno, L298N motor driver, GA25-370 encoder motor, potentiometer, and OLED display — live RPM readout shown on screen.*
+*Arduino Uno, L298N motor driver, GA25-370 encoder motor, potentiometer, and OLED display with a live RPM readout shown on screen.*
 
 <img src="plotters/step_response_after1.png" width="600">
 
