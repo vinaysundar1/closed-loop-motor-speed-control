@@ -65,9 +65,6 @@ turns by hand and counted ticks directly.
 
 - Measured: **170 PPR** (averaged over 5 trials)
 - Implied gear ratio: ~15.5:1, not the assumed 20:1
-- This matters because this motor line uses non-round gearbox ratios (its spec sheet
-  lists ratios like 1:44, 1:103, 1:230 across RPM variants — not clean round numbers),
-  so trusting a measured value over a labeled/assumed one was the right call.
 
 ## Tuning Process
 
@@ -78,7 +75,7 @@ turns by hand and counted ticks directly.
 
 Diagnosis: the derivative term was amplifying tick-count measurement noise (division
 by a small `dt` multiplies noise), and the integral anti-windup only clamped the
-final value rather than preventing over-accumulation during saturation — both
+final value rather than preventing over-accumulation during saturation, both
 contributing to a sustained/growing limit cycle.
 
 **Fix:** added EMA filtering on the RPM measurement and on the derivative term, and
@@ -88,13 +85,14 @@ switched to conditional-integration anti-windup.
 *Kp=1.0, Ki=0.08, Kd=0.02 — clean damped response, but settles ~30 RPM below setpoint*
 
 Diagnosis: proportional control alone cannot fully close steady-state error against
-real motor friction/load — that gap can only be closed by the integral term, and Ki
+real motor friction/load, that gap can only be closed by the integral term, and Ki
 was too small to close it in a reasonable time.
 
 **Final tune:** increased Ki to close the steady-state gap without reintroducing
 oscillation.
 
 ![Final tuned response](docs/step_response_final.png)
+*Kp=1.0, Ki=0.75, Kd=0.02*
 *Final result: settles at setpoint with minimal overshoot*
 
 ## Live Setpoint via Potentiometer
@@ -127,9 +125,6 @@ steady-state tracking within ~±5 RPM*
 | Kp | 1.0 | Primary response to instantaneous error |
 | Ki | 0.75 | Eliminates steady-state error from motor friction/load; tuned higher to track a live, moving setpoint |
 | Kd | 0.02 | Damps overshoot; kept small since it acts on a filtered signal |
-
-*(these were re-validated against a live potentiometer setpoint, not just the fixed
-150 RPM step test — update if you retune Ki down for less overshoot)*
 
 ## Lessons Learned
 
