@@ -4,8 +4,7 @@ Closed-loop DC motor speed control using a quadrature encoder for feedback and a
 algorithm to hold a target RPM, running on an Arduino Uno. Includes real-time serial
 plotting and an OLED status display.
 
-![Setpoint 150 RPM, damped step response](<img src="plotters/step_response_after.png" alt="Description" style="width:50%; height:auto;">)
-*(replace with your actual final step-response screenshot)*
+<img src="docs/step_response_after.png" width="600">
 
 ## Results
 
