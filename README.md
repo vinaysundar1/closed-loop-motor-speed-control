@@ -70,7 +70,7 @@ turns by hand and counted ticks directly.
 
 **Initial attempt** — naive PID with unfiltered RPM feedback:
 
-![Growing oscillation, unfiltered](docs/step_response_before.png)
+![Growing oscillation, unfiltered](plotters/step_response_before.png)
 *Kp=0.6, Ki=0.1, Kd=0.05 — oscillation amplitude grows over time rather than settling*
 
 Diagnosis: the derivative term was amplifying tick-count measurement noise (division
@@ -81,7 +81,7 @@ contributing to a sustained/growing limit cycle.
 **Fix:** added EMA filtering on the RPM measurement and on the derivative term, and
 switched to conditional-integration anti-windup.
 
-![Damped response after filtering, Kp=1](docs/step_response_filtered.png)
+![Damped response after filtering, Kp=1](plotters/step_response_filtered.png)
 *Kp=1.0, Ki=0.08, Kd=0.02 — clean damped response, but settles ~30 RPM below setpoint*
 
 Diagnosis: proportional control alone cannot fully close steady-state error against
@@ -91,7 +91,7 @@ was too small to close it in a reasonable time.
 **Final tune:** increased Ki to close the steady-state gap without reintroducing
 oscillation.
 
-![Final tuned response](docs/step_response_final.png)
+![Final tuned response](plotters/step_response_final.png)
 *Kp=1.0, Ki=0.75, Kd=0.02*
 *Final result: settles at setpoint with minimal overshoot*
 
