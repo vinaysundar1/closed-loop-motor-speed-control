@@ -154,7 +154,7 @@ holding steady-state tracking at the new target*
   same as preventing it from over-accumulating in the first place.
 - Empirical calibration (measuring encoder PPR directly) caught an incorrect
   assumption that a spec-sheet/datasheet number would have missed.
-- Isolating one gain at a time — holding two fixed while varying the third — was
+- Isolating one gain at a time was
   what actually revealed which gain caused which symptom. Multiple tests where Ki
   and Kd changed with no effect on the first overshoot were what pointed to Kp as
   the real cause, rather than guessing.
