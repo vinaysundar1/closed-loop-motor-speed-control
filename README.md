@@ -141,8 +141,7 @@ A moving setpoint introduces failure modes a fixed step test doesn't expose:
 
 <img src="plotters/Recording 2026-07-31 161209.gif" width="600">
 
-*Kp=0.5, Ki=0.5, Kd=0.08 — RPM (orange) tracks a setpoint (green) jump from ~55 to
-~275 RPM, with one overshoot to ~295 and one undershoot to ~260 before settling and
+*Kp=0.5, Ki=0.5, Kd=0.08 — RPM (orange) tracks a setpoint (green) jump, with one overshoot to one undershoot before settling and
 holding steady-state tracking at the new target*
 
 ## Final PID Gains
@@ -168,9 +167,8 @@ holding steady-state tracking at the new target*
 
 ## Future Improvements
 
-- Switch to derivative-on-measurement instead of derivative-on-error, so a fast knob
-  turn can never cause a derivative kick
 - Reset the integral term on large setpoint jumps, so accumulated history from the
   old target doesn't bleed into the transient response at a new one
 - Quadrature (2-channel) decoding for direction sensing and 4x resolution
 - Auto-tuning via relay/Ziegler-Nichols method triggered by a button press
+- Using more precise motors and potentiometers to reduce error.
