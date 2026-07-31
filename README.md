@@ -11,7 +11,7 @@ plotting and an OLED status display.
 
 With a live, continuously-varying setpoint (driven by a potentiometer rather than a
 fixed step), the controller tracks a ramping target with about one damped overshoot
-cycle before settling, and holds within roughly **±5 RPM of setpoint at steady
+cycle before settling, and holds within roughly **±2 RPM of setpoint at steady
 state**.
 
 ## Hardware
@@ -116,7 +116,7 @@ A moving setpoint introduces failure modes a fixed step test doesn't expose:
 ![Live setpoint tracking a potentiometer ramp](plotters/live_setpoint_tracking.png)
 *Kp=1.0, Ki=0.75, Kd=0.02 — RPM (orange) tracks a rising setpoint (blue) from ~55 to
 ~215 RPM, with one small overshoot/undershoot cycle before settling and holding
-steady-state tracking within ~±5 RPM*
+steady-state tracking within ~±2 RPM*
 
 ## Final PID Gains
 
