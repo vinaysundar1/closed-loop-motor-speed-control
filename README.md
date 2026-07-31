@@ -12,8 +12,7 @@ plotting and an OLED status display.
 With a live, continuously-varying setpoint (driven by a potentiometer rather than a
 fixed step), the controller tracks a ramping target with about one damped overshoot
 cycle before settling, and holds within roughly **±5 RPM of setpoint at steady
-state** — showing the tuning generalizes from a fixed step-response test to a
-real-world moving input, not just a single lab condition.
+state**.
 
 ## Hardware
 
