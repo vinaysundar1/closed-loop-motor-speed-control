@@ -4,7 +4,7 @@ Closed-loop DC motor speed control using a quadrature encoder for feedback and a
 algorithm to hold a target RPM, running on an Arduino Uno. Includes real-time serial
 plotting and an OLED status display.
 
-<img src="plotters/hardware_setup.jpg" width="400">
+<img src="plotters/hardware_setup.jpg" width="500">
 
 *Arduino Uno, L298N motor driver, GA25-370 encoder motor, potentiometer, and OLED display with a live RPM readout shown on screen.*
 
