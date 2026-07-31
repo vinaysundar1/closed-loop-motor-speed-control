@@ -113,7 +113,7 @@ A moving setpoint introduces failure modes a fixed step test doesn't expose:
   (derivative-on-error reacts to setpoint changes; derivative-on-measurement does
   not, since it only differentiates the physical RPM signal).
 
-![Live setpoint tracking a potentiometer ramp](docs/live_setpoint_tracking.png)
+![Live setpoint tracking a potentiometer ramp](plotters/live_setpoint_tracking.png)
 *Kp=1.0, Ki=0.75, Kd=0.02 — RPM (orange) tracks a rising setpoint (blue) from ~55 to
 ~215 RPM, with one small overshoot/undershoot cycle before settling and holding
 steady-state tracking within ~±5 RPM*
