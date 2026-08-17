@@ -65,15 +65,6 @@ flowchart LR
    the raw sum has to be forced into the range the hardware can actually accept) and
    written via `analogWrite` to the motor driver's PWM input.
 
-## Encoder Calibration
-
-Rather than trust the nominal spec (11 pulses/rev × assumed 20:1 gear ratio = 220
-PPR), I calibrated empirically: rotated the output shaft a measured number of full
-turns by hand and counted ticks directly.
-
-- Measured: **170 PPR** (averaged over 5 trials)
-- Implied gear ratio: ~15.5:1, not the assumed 20:1
-
 ## Tuning Process
 
 **Initial attempt** — naive PID with unfiltered RPM feedback:
@@ -132,14 +123,10 @@ the target speed can be changed live by turning a knob.
 
 A moving setpoint introduces failure modes a fixed step test doesn't expose:
 
-- **Small electrical noise on the analog reading** could cause the setpoint to
+- **Small electrical noise on the analog reading** caused the setpoint to
   flicker by a couple RPM every loop, which would look like a disturbance to the
-  derivative term. Fixed with a simple deadband: the setpoint only updates if the
+  derivative term. Fixed with a deadband: the setpoint only updates if the
   new reading differs from the current one by more than 3 RPM.
-- **A fast knob turn** creates a rapid setpoint change, which risks a derivative
-  kick if the derivative is computed on error rather than on the measurement itself
-  (derivative-on-error reacts to setpoint changes; derivative-on-measurement does
-  not, since it only differentiates the physical RPM signal).
 
 <img src="plotters/live_setpoint_tracking.gif" width="600">
 
