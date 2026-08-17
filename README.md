@@ -160,7 +160,7 @@ The breadboard prototype above was translated into a custom PCB in KiCad,
 consolidating the Arduino, motor driver, and peripheral connections into a single
 soldered board with defined connector headers.
 
-<img src="KiCad_Files/PID_Schematic.png" width="400">
+<img src="plotters/PID_Schematic.png" width="400">
 
 *Full schematic — Arduino header, DRV8871 motor driver with support circuitry,
 barrel jack power input, and connector headers for the encoder, OLED, and
@@ -196,7 +196,7 @@ Trace widths were calculated using KiCad's built-in IPC-2221 calculator:
 | Power (VMOTOR, GND, motor outputs) | 2A (ILIM-protected worst case), 10°C rise | ~30.8 mil | 32 mil |
 | Signal (I2C, control inputs, ILIM) | 1A reference, 10°C rise | ~12 mil | 12 mil |
 
-<img src="KiCad_Files/PID_PCB.png" width="350">
+<img src="plotters/PID_PCB.png" width="350">
 
 *Routed PCB layout — 0.8mm power traces (VMOTOR/GND/motor outputs), 0.3mm signal
 traces, ground pour on the bottom layer with thermal vias under the driver IC.*
