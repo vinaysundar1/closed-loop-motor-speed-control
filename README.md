@@ -154,6 +154,54 @@ holding steady-state tracking at the new target*
 | Ki | 0.5 | Eliminates steady-state error from motor friction/load |
 | Kd | 0.08 | Damps overshoot; raised from an initial 0.02 now that the derivative acts on a filtered signal |
 
+## PCB Design
+
+The breadboard prototype above was translated into a custom PCB in KiCad,
+consolidating the Arduino, motor driver, and peripheral connections into a single
+soldered board with defined connector headers.
+
+<img src="kicad/schematic.png" width="700">
+
+*Full schematic — Arduino header, DRV8871 motor driver with support circuitry,
+barrel jack power input, and connector headers for the encoder, OLED, and
+potentiometer.*
+
+### Driver Selection: DRV8871 over L298N
+
+The original L298N module (used in the breadboard build above) was replaced with a
+TI DRV8871 integrated H-bridge driver on the custom PCB. The DRV8871 integrates current limiting and thermal
+protection directly, at the cost of requiring board-level component selection
+(current-limit resistor, decoupling) rather than a plug-and-play module.
+
+### Current-Limit (ILIM) Resistor
+
+The DRV8871 sets its current limit via a resistor from ILIM to GND, per the
+datasheet relationship ITRIP ≈ 64,000 / R_ILIM(Ω). The GA25-370's rated block/stall
+current is 1.1A; a 32kΩ resistor was chosen to set a ~2A limit, giving roughly 2x
+margin above the motor's normal stall current so the limit protects against
+faults without nuisance-tripping during normal operation.
+
+### Decoupling
+
+A 0.1µF ceramic capacitor (high-frequency switching noise) and a 47µF electrolytic
+capacitor (bulk current supply during motor transients) are placed across VM/GND,
+matching TI's reference application circuit for this driver.
+
+### Power Trace Sizing
+
+Trace widths were calculated using KiCad's built-in IPC-2221 calculator:
+
+| Net class | Current basis | Calculated minimum | Used |
+|---|---|---|---|
+| Power (VMOTOR, GND, motor outputs) | 2A (ILIM-protected worst case), 10°C rise | ~30.8 mil | 32 mil |
+| Signal (I2C, control inputs, ILIM) | 1A reference, 10°C rise | ~12 mil | 12 mil |
+
+<img src="kicad/pcb_layout.png" width="700">
+
+*Routed PCB layout — 0.8mm power traces (VMOTOR/GND/motor outputs), 0.3mm signal
+traces, ground pour on the bottom layer with thermal vias under the driver IC.*
+
+
 ## Lessons Learned
 
 - Sensor noise, not just gain values, can be the root cause of oscillation.
