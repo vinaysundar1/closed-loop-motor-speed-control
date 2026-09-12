@@ -1,12 +1,14 @@
 # PID Motor Speed Controller
 
 Closed-loop DC motor speed control using a quadrature encoder for feedback and a PID
-algorithm to hold a target RPM, running on an Arduino Uno. Includes real-time serial
-plotting and an OLED status display.
+algorithm to hold a target RPM, running on an Arduino Uno. Custom PCB designed in
+KiCad, hand-soldered and assembled into a complete PCBA.
+[github.com/vinaysundar1/closed-loop-motor-speed-control](https://github.com/vinaysundar1/closed-loop-motor-speed-control)
 
-<img src="plotters/hardware_setup.jpg" width="500">
+<img src="plotters/pcba_finished.jpg" width="500">
 
-*Arduino Uno, L298N motor driver, GA25-370 encoder motor, potentiometer, and OLED display with a live RPM readout shown on screen.*
+*Finished PCBA — Arduino, DRV8871 driver, barrel jack, and encoder/OLED/potentiometer
+headers, hand-soldered and assembled.*
 
 <img src="plotters/step_response_after1.png" width="600">
 
@@ -143,9 +145,14 @@ holding steady-state tracking at the new target*
 
 ## PCB Design
 
-The breadboard prototype above was translated into a custom PCB in KiCad,
+The breadboard prototype below was translated into a custom PCB in KiCad,
 consolidating the Arduino, motor driver, and peripheral connections into a single
 soldered board with defined connector headers.
+
+<img src="plotters/hardware_setup.jpg" width="500">
+
+*v1 — breadboard prototype: Arduino Uno, L298N motor driver, GA25-370 encoder motor,
+potentiometer, and OLED display.*
 
 <img src="plotters/PID_Schematic.png" width="400">
 
@@ -188,6 +195,11 @@ Trace widths were calculated using KiCad's built-in IPC-2221 calculator:
 *Routed PCB layout — 0.8mm power traces (VMOTOR/GND/motor outputs), 0.3mm signal
 traces, ground pour on the bottom layer with thermal vias under the driver IC.*
 
+<img src="plotters/pcba_bringup.jpg" width="500">
+
+*Bench bring-up — the assembled PCBA connected to the motor, encoder, and OLED
+during initial power-on testing, confirming the board functions as designed
+before final wiring cleanup.*
 
 ## Lessons Learned
 
