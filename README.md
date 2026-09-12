@@ -5,7 +5,7 @@ algorithm to hold a target RPM, running on an Arduino Uno. Custom PCB designed i
 KiCad, hand-soldered and assembled into a complete PCBA.
 [github.com/vinaysundar1/closed-loop-motor-speed-control](https://github.com/vinaysundar1/closed-loop-motor-speed-control)
 
-<img src="plotters/pcba_finished.jpg" width="500">
+<img src="plotters/pcba_finished.jpg" width="350">
 
 *Finished PCBA — Arduino, DRV8871 driver, barrel jack, and encoder/OLED/potentiometer
 headers, hand-soldered and assembled.*
@@ -195,7 +195,7 @@ Trace widths were calculated using KiCad's built-in IPC-2221 calculator:
 *Routed PCB layout — 0.8mm power traces (VMOTOR/GND/motor outputs), 0.3mm signal
 traces, ground pour on the bottom layer with thermal vias under the driver IC.*
 
-<img src="plotters/pcba_bringup.jpg" width="500">
+<img src="plotters/pcba_bringup.jpg" width="350">
 
 *Bench bring-up — the assembled PCBA connected to the motor, encoder, and OLED
 during initial power-on testing, confirming the board functions as designed
