@@ -160,13 +160,6 @@ potentiometer, and OLED display.*
 barrel jack power input, and connector headers for the encoder, OLED, and
 potentiometer.*
 
-### Driver Selection: DRV8871 over L298N
-
-The original L298N module (used in the breadboard build above) was replaced with a
-TI DRV8871 integrated H-bridge driver on the custom PCB. The DRV8871 integrates current limiting and thermal
-protection directly, at the cost of requiring board-level component selection
-(current-limit resistor, decoupling) rather than a plug-and-play module.
-
 ### Current-Limit (ILIM) Resistor
 
 The DRV8871 sets its current limit via a resistor from ILIM to GND, per the
